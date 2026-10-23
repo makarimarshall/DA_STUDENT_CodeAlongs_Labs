@@ -35,7 +35,7 @@ print('----- 1. Nested Loop, Live -----')
 # TODO: write a nested loop that prints every (row, col)
 # pair for row in range(2) and col in range(3)
 for row in range(2):
-    for col in range (3):
+    for col in range(3):
         print(row, col)
 # PREDICT before you run: Change the Nested Loop code to range(3) on the
 #                         outside and range(2) on the inside. How many lines
@@ -68,8 +68,8 @@ if operation == "ADD":
 # DISCUSS: Suppose the inner quantity check in the Nested Conditional code
 #          never seems to run. What should you trace first? Try it: set
 #          operation to "SEARCH" and run.
-# Your answer: I woiuld check the outer if statement first. 
-# If operation is "SEARCH" instead od "ADD", the condition is False,
+# Your answer: I would check the outer if statement first. 
+# If operation is "SEARCH" instead of "ADD", the condition is False,
 # so Python skips the inner quantity check.
 #
 #
@@ -86,11 +86,11 @@ print('----- 3. Putting It Together: Loop + Nested Conditional -----')
 transactions = ["ADD 10", "REMOVE 3", "ADD -5"]
 
 for transaction in transactions:
-    operation, amount =transaction.split()
+    operation, amount = transaction.split()
     amount = int(amount)
     
     if operation == "ADD":
-        if amount >0:
+        if amount > 0:
             print("Valid quantity")
         else:
             print("Invalid quantity")
