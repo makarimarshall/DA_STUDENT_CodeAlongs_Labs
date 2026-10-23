@@ -28,3 +28,40 @@ You've just joined a data team, and someone drops `data/energy_sample.csv` in yo
 ## Share Out
 
 Two questions, in this order. First: how did your group figure out whether every country reports every column? Different groups almost certainly took different routes to the same file — compare them before deciding which you'd reach for next time. Second: which collection concerns did your group flag, and which single data-quality question did you sharpen out of them? Put each group's question up where everyone can read it, then ask the class which ones a real analyst could actually go answer — and which ones sound serious but can't be checked.
+
+## My Lab Answers
+### 1. Dataset Size
+
+I used wc -l to count 71 lines, including the header.
+That means there are 70 data rows across 10 countries.
+
+### 2. Missing Data / Collection Concern #1
+
+I found that Kenya and Nigeria are missing fossil_share_energy values from 2015 to 2021, which is 14 missing values total. This could affect comparisons between countries.
+
+### 3. Column Classifications
+
+1. **country — Categorical (String):** This column contains country names like Australia, Brazil, and Canada. These are labels rather than numerical measurements.
+
+2. **year — Discrete Numerical (Temporal):** This column contains whole-number years from 2015 to 2021, which represent different points in time.
+
+3. **iso_code — Categorical (String):** This column contains three-letter codes like AUS, BRA, and USA that identify countries.
+
+4. **population — Discrete Numerical (Integer):** This column counts how many people live in each country. The values are whole numbers.
+
+5. **energy_per_capita — Continuous Numerical (Float):** This column measures energy consumption per person and includes decimal values like 66879.320.
+
+6. **fossil_share_energy — Continuous Numerical (Float):** This column measures the percentage of energy coming from fossil fuels. It contains decimal values, although Kenya and Nigeria have missing entries.
+
+7. **renewables_share_energy — Continuous Numerical (Float):** This column measures the percentage of energy coming from renewable sources and includes decimal values like 5.955.
+
+### 4. Collection Concern #2
+
+The dataset doesn't have clear documentation showing where the information came from or how it was collected. Without knowing the original source, it's difficult to confirm whether the data is accurate and reliable.
+
+### 5. Data-Quality Question
+
+ Why is fossil_share_energy missing for Kenya and Nigeria from 2015 to 2021? Can we find the missing values from the original source to make the dataset more complete?
+
+### 6. How I Checked for Missing Data
+  I used the awk command in Terminal to check all seven columns for empty values. After finding 14 missing values in the fossil_share_energy column, I used another awk command to identify which countries and years were affected. The results showed that Kenya and Nigeria were missing values from 2015 to 2021
