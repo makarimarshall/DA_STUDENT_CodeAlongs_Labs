@@ -1,26 +1,6 @@
+
 #!/usr/bin/env python3
-"""Nested Loops & Conditionals
-Module 1: Python Foundations
-
-HOW TO RUN
-    Open a terminal in the folder that holds this file (and any data
-    file the code reads), then run:
-        python3 Module1_Lesson2_nested-loops-conditionals_STUDENT.py
-    Or make the file executable once:
-        chmod +x Module1_Lesson2_nested-loops-conditionals_STUDENT.py
-    and from then on run it directly:
-        ./Module1_Lesson2_nested-loops-conditionals_STUDENT.py
-    The first line, #!/usr/bin/env python3 (the "shebang"), is what
-    makes ./ work: it names the program that runs this file.
-    python3 <file> treats that line as a comment and ignores it.
-
-Follow along: type each section as it comes up, then save and run the
-file again after each section. Each section prints its own heading,
-so you can tell which output belongs to which step.
-
-Complete each TODO as you go. A ____ blank is not valid Python, so
-fill it in before you run the file again.
-"""
+"""Day 2 code-along: Nested Loops & Conditionals. Run: python3 <file>"""
 
 # ===== 1. Nested Loop, Live =====
 # Print all six row and column pairs, starting at 0 0 and ending at 1 2.
@@ -29,7 +9,6 @@ fill it in before you run the file again.
 #          range(2). Put these outputs in the order Python prints them. A: 1 0.
 #          B: 0 0. C: 1 1. D: 0 1.
 # Your answer: B,D,A,C
-#
 #
 print('----- 1. Nested Loop, Live -----')
 # TODO: write a nested loop that prints every (row, col)
@@ -49,13 +28,11 @@ for row in range(2):
 # Your answer: The print statement is outside the inner loop, so it only runs once for each outer loop (3 times).
 
 
-
 # ===== 2. Nested Conditional, Live =====
-# Check a transaction in two steps: first the operation type, then whether the
-# quantity is positive. Here it should print Invalid quantity.
+# Check the operation type first, then if the quantity is positive.
 print('----- 2. Nested Conditional, Live -----')
-# TODO: check operation first; if it's "ADD", nest a second
-# check confirming quantity is greater than 0
+# TODO: check operation first
+# TODO: if it's "ADD", nest a second check that quantity is above 0
 operation = "ADD"
 quantity = -5
 
@@ -72,12 +49,10 @@ if operation == "ADD":
 # If operation is "SEARCH" instead of "ADD", the condition is False,
 # so Python skips the inner quantity check.
 #
-#
 
 
 # ===== 3. Putting It Together: Loop + Nested Conditional =====
-# Check each transaction line and print whether it is valid, has an invalid
-# quantity, or is a remove.
+# Check each line: print whether it is valid, a bad quantity, or a remove.
 print('----- 3. Putting It Together: Loop + Nested Conditional -----')
 # TODO: loop over transactions; for each line, split it into
 # operation and amount, then nest the ADD/quantity check
@@ -100,5 +75,4 @@ for transaction in transactions:
 #                         "ADD -5" as invalid: operation == "ADD", amount > 0,
 #                         or operation == "REMOVE"?
 # Your answer: amount > 0 because -5 is not greater than 0 this makes the quantity invalid.
-#
 #
