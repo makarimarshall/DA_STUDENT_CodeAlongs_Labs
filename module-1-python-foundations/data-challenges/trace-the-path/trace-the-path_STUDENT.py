@@ -44,19 +44,18 @@ SUBMIT
 
 # 1. What does one row represent?
 # Your answer:
-#
-#
+# Each row represents one completed volunteer shift,
+# showing the volunteer's name, day, and hours worked.
 
 # 2. Which fields hold numbers, and which hold text?
 # Your answer:
-#
-#
+# The volunteer's name and weekday are text.
+# The hours worked is a number (the third field).
 
 # 3. What already looks wrong, missing or inconsistent?
-# Your answer:
-#
-#
-
+# I don't see any missing values or obvious formatting
+# issues. Each row has three fields separated by commas.
+# Some volunteers worked multiple shifts during the week.
 ############################################################################
 #  DAY 1
 ############################################################################
@@ -84,24 +83,31 @@ SUBMIT
 # If the two differ, say which line you mis-read. Do not edit the
 # prediction.
 
+# My prediction: 5 long shifts.
+# I counted the shifts lasting 4 hours or more.
+# The qualifying hours are 4, 5, 4, 6, and 4.
+# A shift of exactly 4 hours counts because >= includes 4.
+
 with open("data/volunteer_shifts.txt") as f:
     shifts = [line for line in f.read().splitlines()
               if line and not line.startswith("#")]
-
+print ("First shift:", shifts[0])
+print("After splitting:", shifts[0].split(","))
 long_shifts = 0
 for shift in shifts:
     hours = int(shift.split(",")[2])
     # TODO: write the test for a long shift. The coordinator counts a
     #       shift of 4 hours or more.
-    if None:
+    if hours >= 4:        
         # TODO: this is the counting line. Move long_shifts on by one.
-        long_shifts = None
+        long_shifts = long_shifts + 1
 
 print("shifts of 4+ hours:", long_shifts)
 
 # Your answer:
-#
-#
+# .split() separates a string into a list of smaller strings.
+# The "," tells Python to split wherever it finds a comma.
+# Source: Python documentation on str.split().
 
 # ===== Step 2: Total the Week's Hours, Printing the Running Total Each Pass =====
 # You already wrote a loop that counts. This one adds up instead, and you
@@ -121,15 +127,19 @@ print("shifts of 4+ hours:", long_shifts)
 #
 # That printed line per pass is a tracing tool, not decoration.
 
+# My prediction: 37 total hours worked this week.
+# I expect the loop to print 12 lines because there are 12 shifts.
+
 total = 0
 for shift in shifts:
     volunteer, day, hours = shift.split(",")
     # TODO: add this shift's hours onto the running total. Mind the
     #       type: everything that came out of that split is a string.
-    total = None
+    total = total + int(hours)
+
     # TODO: print one line per pass: the day, the volunteer, and the
     #       total so far. This printed line IS the tracing tool.
-    print(day, volunteer, "| running total:", None)
+    print(day, volunteer, "| running total:", total)
 
 print("total hours logged this week:", total)
 
@@ -150,8 +160,11 @@ print("total hours logged this week:", total)
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# I predicted 5 long shifts and 37 total hours across 12 shifts.
+# My predictions were correct, and I didn't miscount anything.
+# The dataset had no missing values, but some volunteers worked multiple shifts.
+# I used print statements to trace the running total because they help
+# catch errors and are more reliable than counting mentally, especially with 430 rows.
 
 ############################################################################
 #  DAY 2
@@ -175,21 +188,24 @@ print("total hours logged this week:", total)
 # If your prediction was a number of records rather than a number of pairs,
 # that gap is the thing to bring to the shareout.
 
+# My prediction: 4 volunteers x 5 weekdays = 20 combinations.
+# Each volunteer is paired with every weekday.
+
 volunteers = []
 days = []
 for shift in shifts:
     volunteer, day, hours = shift.split(",")
     # TODO: only append a volunteer this list does not already have.
-    if None:
+    if volunteer not in volunteers:
         volunteers.append(volunteer)
     # TODO: the same test again, for the day.
-    if None:
+    if day not in days:
         days.append(day)
 
 checks = 0
 for volunteer in volunteers:
     # TODO: the inner loop. One pass per weekday, for each volunteer.
-    for day in None:
+    for day in days:
         checks = checks + 1
 
 print(len(volunteers), "volunteers x", len(days), "days =", checks)
@@ -213,6 +229,8 @@ print(len(volunteers), "volunteers x", len(days), "days =", checks)
 # Both loops run clean, with no traceback from either. Only one of them is
 # right.
 
+# My prediction: The buggy loop visits 11 out of 12 shifts.
+# It skips the last record, Priya,Fri,2, at index 11.
 buggy_seen = 0
 for i in range(len(shifts) - 1):
     buggy_seen = buggy_seen + 1
@@ -220,7 +238,7 @@ for i in range(len(shifts) - 1):
 fixed_seen = 0
 # TODO: write the loop header that visits EVERY row, not all but one.
 #       The body below is already correct. Only the range changes.
-for i in None:
+for i in range(len(shifts)):
     fixed_seen = fixed_seen + 1
 
 print("rows in the file:   ", len(shifts))
@@ -228,7 +246,7 @@ print("buggy loop visited: ", buggy_seen)
 print("fixed loop visited: ", fixed_seen)
 # TODO: print the one row the buggy loop never reached. Reach into the
 #       list by position; do not retype the row by hand.
-print("the row it never saw:", None)
+print("the row it never saw:", shifts[11])
 
 # ----- Share Out: Day 2 -----
 # Last 15 minutes, back together as a class. Bring:
@@ -249,5 +267,19 @@ print("the row it never saw:", None)
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
+# I predicted 4 volunteers x 5 weekdays = 20 pairs.
+# This counts every possible volunteer-weekday combination,
+# not the 12 completed shifts recorded in the file.
 #
+# The buggy loop visited 11 rows, while the corrected loop visited 12.
+# range(len(shifts) - 1) produces indexes 0 through 10,
+# leaving out index 11, which contains Priya,Fri,2.
+# Comparing the visit count with len(shifts) would also work
+# on a file too large to check by eye.
 #
+# I used AI to help explain and fix the code, then checked
+# the explanations against the program's printed results.
+# The final results matched my counts.
+#
+# Next time, I would check my current folder before running
+# the script and test each section as I finish it.

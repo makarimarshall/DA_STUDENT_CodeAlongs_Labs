@@ -27,9 +27,16 @@ fill it in before you run the file again.
 # before you check it.
 print('----- 1. Step 1: Just Look at the Data -----')
 # TODO: create a list called lines with these 5 strings:
-# "ADD,Chess,4", "ADD,Checkers,two", "ADD,Uno", "" (empty), "ADD,Clue,6"
+lines = [
+    "ADD, Chess, 4 " ,
+    "ADD, Checkers, two" ,
+    "ADD, Uno" ,
+    "",
+    "ADD, Clue, 6"
+]
 
-
+for line in lines:
+    print(line)
 # TODO: loop over lines and print each one
 
 
